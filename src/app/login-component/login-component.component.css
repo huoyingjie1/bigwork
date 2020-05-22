@@ -1,0 +1,24 @@
+html,body{
+    font-size: 15px;
+    
+  }
+
+  form{
+       border: 1px solid red;
+			 width: 36rem;
+			 height: 25rem;
+			 text-align:center;
+			 font-size: 1.1rem;
+			 border-radius:15px;
+			 padding:1rem;
+			 background:white;
+			 opacity: .8;
+  }
+
+  .login-content{
+    height: 100vh;
+  }
+
+  .page{
+    background-image:url('http://5b0988e595225.cdn.sohucs.com/images/20180202/467ae045ec57472ca2a11eab77cccb0d.gif');
+  }

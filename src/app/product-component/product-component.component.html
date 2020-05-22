@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>学生成绩管理系统</title>
+    <script src="https://unpkg.com/rxjs/bundles/rxjs.umd.min.js"></script>
+    <script>
+        function getUsers(){
+            var xmlhttp = new XMLHttpRequest();
+
+            xmlhttp.onreadystatechange=function(){
+                 if (xmlhttp.readyState==4 && xmlhttp.status==200){
+                       document.getElementById("demo").innerHTML=xmlhttp.responseText;
+                }
+             };
+             xmlhttp.open("GET","http://localhost:8080/users",true);
+             xmlhttp.send();
+        }
+
+        function addUsers(){
+            var xmlhttp = new XMLHttpRequest();
+
+            xmlhttp.onreadystatechange=function(){
+                 if (xmlhttp.readyState==4 && xmlhttp.status==200){
+                       document.getElementById("demo").innerHTML=xmlhttp.responseText;
+                }
+             };
+             xmlhttp.open("POST","http://localhost:8080/user",true);
+             const user={
+                 id:document.getElementById('id').value,
+                 userName:document.getElementById('userName').value,
+                 password:document.getElementById('password').value
+             };
+             xmlhttp.setRequestHeader("Content-type","application/json");
+             xmlhttp.send(JSON.stringify(user));
+        }
+
+        function deleteUsers(){
+            var xmlhttp = new XMLHttpRequest();
+
+            xmlhttp.onreadystatechange=function(){
+                 if (xmlhttp.readyState==4 && xmlhttp.status==200){
+                       document.getElementById("demo").innerHTML=xmlhttp.responseText;
+                }
+             };
+             xmlhttp.open("DELETE","http://localhost:8080/user/:id",true);
+             xmlhttp.send();
+        }
+    </script>
+</head>
+<body>
+    <form>
+         <input type="text" id="id" name="id" placeholder="输入用户id">
+         <input type="text" id="userName" name="userName" placeholder="输入用户名">
+         <input type="password" id="password" name="password" placeholder="输入密码">
+         <input type="button" onclick="addUsers()" value="添加用户">
+         <input type="button" onclick="deleteUsers()" value="删除用户">
+    </form>
+    <input type="button" onclick="getUsers()" value="获取用户">
+    <div id="demo"></div>
+</body>
+</html>
