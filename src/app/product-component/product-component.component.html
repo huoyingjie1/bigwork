@@ -1,63 +1,46 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>学生成绩管理系统</title>
-    <script src="https://unpkg.com/rxjs/bundles/rxjs.umd.min.js"></script>
-    <script>
-        function getUsers(){
-            var xmlhttp = new XMLHttpRequest();
-
-            xmlhttp.onreadystatechange=function(){
-                 if (xmlhttp.readyState==4 && xmlhttp.status==200){
-                       document.getElementById("demo").innerHTML=xmlhttp.responseText;
-                }
-             };
-             xmlhttp.open("GET","http://localhost:8080/users",true);
-             xmlhttp.send();
-        }
-
-        function addUsers(){
-            var xmlhttp = new XMLHttpRequest();
-
-            xmlhttp.onreadystatechange=function(){
-                 if (xmlhttp.readyState==4 && xmlhttp.status==200){
-                       document.getElementById("demo").innerHTML=xmlhttp.responseText;
-                }
-             };
-             xmlhttp.open("POST","http://localhost:8080/user",true);
-             const user={
-                 id:document.getElementById('id').value,
-                 userName:document.getElementById('userName').value,
-                 password:document.getElementById('password').value
-             };
-             xmlhttp.setRequestHeader("Content-type","application/json");
-             xmlhttp.send(JSON.stringify(user));
-        }
-
-        function deleteUsers(){
-            var xmlhttp = new XMLHttpRequest();
-
-            xmlhttp.onreadystatechange=function(){
-                 if (xmlhttp.readyState==4 && xmlhttp.status==200){
-                       document.getElementById("demo").innerHTML=xmlhttp.responseText;
-                }
-             };
-             xmlhttp.open("DELETE","http://localhost:8080/user/:id",true);
-             xmlhttp.send();
-        }
-    </script>
-</head>
-<body>
-    <form>
-         <input type="text" id="id" name="id" placeholder="输入用户id">
-         <input type="text" id="userName" name="userName" placeholder="输入用户名">
-         <input type="password" id="password" name="password" placeholder="输入密码">
-         <input type="button" onclick="addUsers()" value="添加用户">
-         <input type="button" onclick="deleteUsers()" value="删除用户">
-    </form>
-    <input type="button" onclick="getUsers()" value="获取用户">
-    <div id="demo"></div>
-</body>
-</html>
+<h2>学生成绩</h2>
+      <form [formGroup]="myForm">
+        <div class="form-group">
+          <label for="id">学号</label>
+          <input type="text" class="form-control" id="id" name="id" [formControl]='id'>
+        </div>
+        <div class="form-group">
+          <label for="userName">姓名</label>
+          <input type="text" class="form-control" id="userName" name="userName" [formControl]='userName'>
+        </div>
+        <div class="form-group">
+          <label for="ChineseGrade">语文成绩</label>
+          <input type="ChineseGrade" class="form-control" id="ChineseGrade" name="ChineseGrade" [formControl]='ChineseGrade'>
+        </div>
+        <div class="form-group">
+          <label for="MathGrade">数学成绩</label>
+          <input type="MathGrade" class="form-control" id="MathGrade" name="MathGrade" [formControl]='MathGrade'>
+        </div>
+      </form>
+        
+      <div>
+        <button type="button" class="btn btn-primary" (click)="search()">查询</button>
+        <button type="button" class="btn btn-success" (click)="add()">添加</button>
+        <button type="button" class="btn btn-danger" (click)="delete()">删除</button>
+        <button type="button" class="btn btn-warning" (click)="update()">修改</button>
+      </div>
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">学号</th>
+            <th scope="col">姓名</th>
+            <th scope="col">语文</th>
+            <th scope="col">数学</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor='let user of users$ | async; let i = index' (click)="select(user)">
+            <th scope="row">{{i}}</th>
+            <td>{{user.id}}</td>
+            <td>{{user.userName}}</td>
+            <td>{{user.ChineseGrade}}</td>
+            <td>{{user.MathGrade}}</td>
+          </tr>
+        </tbody>
+      </table>

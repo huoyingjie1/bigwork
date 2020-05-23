@@ -1,1 +1,22 @@
-<p>user-management-component works!</p>
+<div class="div2">
+<table class="table table-striped">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">学号</th>
+        <th scope="col">姓名</th>
+        <th scope="col">语文</th>
+        <th scope="col">数学</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor='let user of users$ | async; let i = index' (click)="select(user)">
+        <th scope="row">{{i}}</th>
+        <td>{{user.id}}</td>
+        <td>{{user.userName}}</td>
+        <td>{{user.ChineseGrade}}</td>
+        <td>{{user.MathGrade}}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>

@@ -33,3 +33,12 @@ nav {
     -webkit-animation:chartjs-render-animation 0.001s;
     animation:chartjs-render-animation 0.001s;
 }
+
+.div1{
+    
+        transform:translateY(-75%);/**上移元素**/
+        -ms-transform:translateY(-75%);
+        -webkit-transform:translateY(-75%);
+    
+    
+}

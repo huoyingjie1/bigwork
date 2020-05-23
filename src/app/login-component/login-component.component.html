@@ -1,9 +1,9 @@
 
 <div class="d-flex justify-content-center page">
     <div class="d-flex align-items-center login-content">
-      <form [formGroup]="myForm" (ngSubmit)="onSubmit(myForm.value)">
+      <form [formGroup]="myForm" (ngSubmit)="islogin()">
         <h3 class="d-flex justify-content-center">用户登录</h3>
-        <p *ngIf="myForm.invalid" class="text-danger">表单无效</p>
+        <p *ngIf="myForm.invalid" class="text-danger">账号或密码错误</p>
         <p>{{name$ | async}}</p>
         <div class="form-group">
           <label for="userName">用户名</label>
@@ -32,7 +32,7 @@
             密码必须大于5位小于8位!
           </div>
         </div>
-        <a class="btn btn-primary btn-block" [routerLink]="['/management']" (click)="login()">登录</a>
+        <a class="btn btn-primary btn-block" [routerLink]="['/management/product']" (click)="islogin()">登录</a>
       </form>
     </div>
   

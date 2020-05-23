@@ -43,11 +43,14 @@ export class LoginComponentComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  login(){
-    this.authService.login();
+  islogin(){
+    if(this.myForm.valid){
+        this.authService.login();
+    }
+    else{
+      this.authService.logout();
+    }
+    
   }  
-  onSubmit(value: any){
-     console.log(value);
-  }
 }
 
